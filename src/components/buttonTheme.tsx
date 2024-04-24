@@ -1,13 +1,19 @@
 'use client'
-import { useContext } from "react"
-import { ThemeContext } from "@/contexts/Theme/theme-provider"
+import { useTheme } from "next-themes"
 
 const ChangeTheme = () => {
-    const { switchTheme, theme } = useContext(ThemeContext)
+    const { setTheme, resolvedTheme } = useTheme()
 
+    const themeToggle = () => {
+        if(resolvedTheme === 'light') {
+            setTheme('dark')
+        } else {
+            setTheme('light')
+        }
+    }
     return (
-        <button onClick={switchTheme} title="Tema">
-            {theme === 'dark' ? (
+        <button onClick={ () => themeToggle()} title="Tema">
+            {resolvedTheme === 'dark' ? (
                 <svg key='dark' width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_8_1674)">
                         <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" stroke="#B0BAC5" strokeOpacity="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
